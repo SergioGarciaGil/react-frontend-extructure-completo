@@ -1,4 +1,4 @@
-import { GET_USERS } from "../actions";
+import { GET_DETAIL, GET_USERS } from "../actions";
 const initialState = {
   users: [],
   userDetail: {},
@@ -10,6 +10,14 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         users: state.users.concat(action.payload),
+      };
+    case GET_DETAIL:
+      let user = state.users.filter(
+        (u) => u.id === parseInt(action.payload.id)
+      );
+      return {
+        ...state,
+        userDetail: user[0],
       };
     default:
       return state;
